@@ -4,14 +4,17 @@
   </head>
   <body>
     <section>
-      <div>1</div>
-      <div>2</div>
       <div class="todoapp">
-        	<input class="new-todo"
+        <input class="new-todo"
             autofocus autocomplete="off"
             placeholder="What needs to be done?"
             v-model="newTodo"
             @change="hoge">
+        <p>1234</p>
+        <div v-for="props in inputsDef">
+          <input v-model="testData[props.key]" type="text" placeholder="{{ props.placeholder }}"
+              @change="setter(props.key, testData[props.key])" />
+        </div>
       </div>
     </section>
     <script src="src/vue.js"></script>

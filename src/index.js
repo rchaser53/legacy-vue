@@ -1,47 +1,37 @@
-// window.onload = function() {
-
-(function (exports) {
-
-	'use strict';
-
-	var STORAGE_KEY = 'todos-vuejs';
-
-	exports.todoStorage = {
-		fetch: function () {
-			return JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
-		},
-		save: function (todos) {
-			localStorage.setItem(STORAGE_KEY, JSON.stringify(todos));
-		}
-	};
-
-})(window);
-
 (function(exports) {
 	'use strict';
 
 	exports.app = new Vue({
 
-	// the root element that will be compiled
 	el: '.todoapp',
 
-	// app initial state
 	data: {
-		todos: todoStorage.fetch(),
+		inputsDef: [
+			{"key": "username", "placeholder": "Username"},
+			{"key": "address", "placeholder": "Address"},
+			{"key": "email", "placeholder": "Email"},
+			{"key": "name", "placeholder": "Name"}
+		],
+		testData : {
+			username: '',
+			address: '',
+			email: '',
+			name: ''
+		},
 		newTodo: 'res',
 		editedTodo: null,
 		visibility: 'all'
 	},
 
 		// watch todos change for localStorage persistence
-		watch: {
-			todos: {
-				handler: function (todos) {
-					todoStorage.save(todos);
-				},
-				deep: true
-			}
-		},
+		// watch: {
+		// 	todos: {
+		// 		handler: function (todos) {
+		// 			todoStorage.save(todos);
+		// 		},
+		// 		deep: true
+		// 	}
+		// },
 
 		// computed properties
 		// http://vuejs.org/guide/computed.html
@@ -109,6 +99,11 @@
 
 			hoge: function(e) {
 				console.log(e, this)
+			},
+
+			setter: function(key, value) {
+					sessionStorage.setItem(key, value);
+					console.log(sessionStorage.getItem(key))
 			}
 		},
 
@@ -129,5 +124,3 @@
 	});
 
 })(window)
-
-// }
